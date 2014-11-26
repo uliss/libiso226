@@ -22,7 +22,7 @@
 
 #include "iso226.h"
 
-static const char * PROGRAMM_NAME = 0;
+static const char * const PROGRAMM_NAME = "phon2spl";
 
 static struct option long_options[] = {
     {"help",  no_argument, 0, 'h'},
@@ -34,11 +34,10 @@ static const char * short_options = "hV";
 
 static void usage() {
     puts ("Converts PHON volume to SPL in db, according to ISO 226 equal-loudness level contours.");
-    printf("    Usage: %s PHON FREQUENCY\n", PROGRAMM_NAME);
+    printf("    Usage: %s PHON FREQUENCY\n\n", PROGRAMM_NAME);
 }
 
 static void parse_options(int argc, char * argv[]) {
-    PROGRAMM_NAME = argv[0];
     int c = 0;
     int option_index = 0;
 
@@ -54,7 +53,7 @@ static void parse_options(int argc, char * argv[]) {
             exit(0);
             break;
         case 'V':
-            printf("Version: %s\n", ISO226_LIBRARY_VERSION);
+            printf("phon2spl %s\n", ISO226_LIBRARY_VERSION);
             exit(EXIT_SUCCESS);
             break;
         case '?':

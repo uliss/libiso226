@@ -29,3 +29,27 @@ configure_file(
 
 add_custom_target(uninstall
     COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
+
+# package
+set(CPACK_PACKAGE_VENDOR "sp")
+set(CPACK_PACKAGE_VERSION_MAJOR "0")
+set(CPACK_PACKAGE_VERSION_MINOR "1")
+set(CPACK_PACKAGE_VERSION_PATCH "0")
+
+set(CPACK_GENERATOR TBZ2)
+set(CPACK_SOURCE_GENERATOR "TBZ2")
+
+set(CPACK_SOURCE_PACKAGE_FILE_NAME
+  "${CMAKE_PROJECT_NAME}-${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH}")
+
+# The following components are regex's to match anywhere (unless anchored)
+# in absolute path + filename to find files or directories to be excluded
+# from source tarball.
+set(CPACK_SOURCE_IGNORE_FILES
+    "~$"
+    "^${PROJECT_SOURCE_DIR}.*/\\\\.git/"
+    "^.*/*.user$"
+)
+
+include(CPack)
+add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
