@@ -22,8 +22,8 @@
 #include "catch/include/catch.hpp"
 #include "iso226.h"
 
-bool cmp(double d1, double d2) {
-    if(abs(d1 - d2) < 0.02)
+bool cmp(double d1, double d2, double delta = 0.02) {
+    if(abs(d1 - d2) < delta)
         return true;
     return false;
 }
@@ -62,6 +62,46 @@ TEST_CASE( "phon2spl", "phon2spl test" )
 
     for(int freq = 12501; freq < 13000; freq++) {
         REQUIRE_FALSE(iso226_phon2spl(20, freq, &res) == 0);
+    }
+}
+
+TEST_CASE( "spl2phon", "spl2phon test" ) {
+    double res = 0;
+    REQUIRE(iso226_spl2phon(80, 1000, &res) == 0);
+    CHECK(cmp(res, 80));
+    REQUIRE(iso226_spl2phon(70, 1000, &res) == 0);
+    CHECK(cmp(res, 70));
+    REQUIRE(iso226_spl2phon(60, 1000, &res) == 0);
+    CHECK(cmp(res, 60));
+    REQUIRE(iso226_spl2phon(50, 1000, &res) == 0);
+    CHECK(cmp(res, 50));
+    REQUIRE(iso226_spl2phon(40, 1000, &res) == 0);
+    CHECK(cmp(res, 40));
+    REQUIRE(iso226_spl2phon(30, 1000, &res) == 0);
+    CHECK(cmp(res, 30));
+    REQUIRE(iso226_spl2phon(20, 1000, &res) == 0);
+    CHECK(cmp(res, 20));
+}
+
+TEST_CASE( "<=>", "<=> test" ) {
+    double res0 = 0;
+    double res1 = 0;
+    REQUIRE(iso226_phon2spl(80, 1000, &res0) == 0);
+    REQUIRE(iso226_spl2phon(res0, 1000, &res1) == 0);
+    CHECK(cmp(res0, res0));
+
+    for(int freq = 20; freq <= 12500; freq += 2) {
+        for(int phon = 20; phon <= 80; phon += 2) {
+            REQUIRE(iso226_phon2spl(phon, freq, &res0) == 0);
+            REQUIRE(iso226_spl2phon(res0, freq, &res1) == 0);
+            CHECK(cmp(res0, res0, 0.015));
+        }
+    }
+}
+
+TEST_CASE( "error test" "error test" ) {
+    for(int i = -1; i < 10; i++) {
+        CHECK(iso226_strerror(i));
     }
 }
 
