@@ -29,7 +29,7 @@ function gen_spl2phon_data() {
         done
 }
 
-spl_fname="@CMAKE_CURRENT_SOURCE_DIR@/sample_phon2spl.txt"
+spl_fname=$1
 rm -rf $spl_fname
 
 seq 20 4 90 | while read phon

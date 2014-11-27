@@ -24,5 +24,5 @@ do
         gen_data $phon >> $fname
 done
 
-cat 1.plot | gnuplot
+cat "@CMAKE_CURRENT_SOURCE_DIR@/equal_loudness.plot" | gnuplot
 
