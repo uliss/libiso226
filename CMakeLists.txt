@@ -14,6 +14,8 @@ add_library(iso226 STATIC iso226.c)
 
 add_executable(phon2spl phon2spl.c)
 target_link_libraries(phon2spl iso226)
+add_executable(spl2phon spl2phon.c)
+target_link_libraries(spl2phon iso226)
 
 add_subdirectory(externals)
 add_subdirectory(tests)
