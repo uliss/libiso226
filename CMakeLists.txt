@@ -1,5 +1,6 @@
 project(iso226)
 cmake_minimum_required(VERSION 2.8)
+enable_testing()
 
 set(CMAKE_INCLUDE_PATH "cmake")
 
