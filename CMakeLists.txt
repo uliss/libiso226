@@ -15,6 +15,7 @@ add_executable(phon2spl phon2spl.c)
 target_link_libraries(phon2spl iso226)
 
 add_subdirectory(externals)
+add_subdirectory(tests)
 
 # install target
 install(TARGETS iso226 phon2spl
