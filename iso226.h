@@ -33,6 +33,7 @@ extern "C" {
 #endif
 
 ISO226_EXPORT int iso226_phon2spl(double phon, double freq, double * spl);
+ISO226_EXPORT int iso226_spl2phon(double spl, double freq, double * phon);
 
 enum ISO226_ERROR {
     ISO226_INVALID_FREQUENCY = 2,

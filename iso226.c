@@ -97,6 +97,32 @@ int iso226_phon2spl(double phon, double freq, double *spl) {
     return 0;
 }
 
+static double calc_Bf(double spl, double af, double Tf, double Lu) {
+    return pow(0.4 * pow(10, (spl + Lu)/10 - 9), af)
+            - pow(0.4 * pow(10, (Tf + Lu) / 10 - 9), af)
+            + 0.005135;
+}
+
+int iso226_spl2phon(double spl, double freq, double * phon) {
+    if(phon == NULL)
+        return ISO226_NULL_DEST;
+
+    int r = 0;
+    double af;
+    double Tf;
+    double Lu;
+    r = get_koefi(freq, &af, &Tf, &Lu);
+    if(r != 0)
+        return r;
+
+    double Bf = calc_Bf(spl, af, Tf, Lu);
+    double Ln = 40 * log10(Bf) + 94;
+
+    *phon = Ln;
+
+    return 0;
+}
+
 static const char * iso226_errors[] = {
     "",
     "",
