@@ -19,8 +19,6 @@
 #include <m_pd.h>
 #include "iso226.h"
 
-#include "phon2spl.h"
-
 typedef struct phon2spl_ {
     t_object xobj;
     t_float phon;
