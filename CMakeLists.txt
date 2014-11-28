@@ -2,12 +2,14 @@ project(iso226)
 cmake_minimum_required(VERSION 2.8)
 enable_testing()
 
-set(CMAKE_INCLUDE_PATH "cmake")
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/")
 
 # build universal binaries
 set(CMAKE_OSX_ARCHITECTURES x86_64;i386)
 add_definitions(-fvisibility=hidden)
 add_definitions(-Wall)
+
+include(FindPureData)
 
 
 add_library(iso226 STATIC iso226.c)

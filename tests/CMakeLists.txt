@@ -11,4 +11,3 @@ add_test("Gnuplot" "sh" "${CMAKE_CURRENT_BINARY_DIR}/plot.sh")
 add_test("ISO226" run_tests)
 
 add_subdirectory(regression)
-
