@@ -15,7 +15,7 @@ find_path(CSOUND6_INCLUDE_DIR csdl.h
 set(CSOUND6_INCLUDE_DIRS ${CSOUND6_INCLUDE_DIR} )
 
 include(FindPackageHandleStandardArgs)
-# handle the QUIETLY and REQUIRED arguments and set LIBXML2_FOUND to TRUE
+# handle the QUIETLY and REQUIRED arguments and set CSOUND6_FOUND to TRUE
 # if all listed variables are TRUE
 find_package_handle_standard_args(CSound6  DEFAULT_MSG
                                   CSOUND6_INCLUDE_DIR)
