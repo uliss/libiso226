@@ -13,6 +13,9 @@ include(FindPureData)
 
 
 add_library(iso226 STATIC iso226.c)
+if(UNIX)
+    target_link_libraries(iso226 m)
+endif()
 
 add_executable(phon2spl phon2spl.c)
 target_link_libraries(phon2spl iso226)
