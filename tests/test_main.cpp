@@ -17,6 +17,7 @@
  ***************************************************************************/
 
 #include <cmath>
+#include <cstdlib>
 
 #define CATCH_CONFIG_MAIN
 #include "catch/include/catch.hpp"
