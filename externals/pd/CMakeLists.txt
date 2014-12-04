@@ -15,7 +15,6 @@ endif()
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     set(CMAKE_SHARED_LIBRARY_PREFIX "")
-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined suppress -flat_namespace")
 endif()
 
 set(CMAKE_INSTALL_NAME_DIR @executable_path)
