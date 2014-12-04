@@ -136,5 +136,5 @@ static double Lu[] = {
 };
 
 
-#endif ISO226_DATA_H
+#endif
 
