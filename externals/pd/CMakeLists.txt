@@ -8,13 +8,19 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/phon2spl-help.pd
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/spl2phon-help.pd
                ${CMAKE_CURRENT_BINARY_DIR}/spl2phon-help.pd)
 
+set(PUREDATA_EXT_INSTALL_DIR "")
+
 if(APPLE)
+    set(PUREDATA_EXT_INSTALL_DIR "~/Library/Pd/iso226")
+
     set(CMAKE_SHARED_LIBRARY_PREFIX "")
     set(CMAKE_SHARED_LIBRARY_SUFFIX ".pd_darwin")
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined suppress -flat_namespace")
 endif()
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+    set(PUREDATA_EXT_INSTALL_DIR ${PUREDATA_EXTRA_DIR})
+
     set(CMAKE_SHARED_LIBRARY_PREFIX "")
     set(CMAKE_SHARED_LIBRARY_SUFFIX ".pd_linux")
 endif()
@@ -35,21 +41,23 @@ set_target_properties(pd_spl2phon
 
 # install
 if(APPLE)
-
-    # install paths
-    set(PD_EXT_INSTALL_DIR "~/Library/Pd/iso226")
-
     install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/phon2spl-help.pd
-            DESTINATION ${PD_EXT_INSTALL_DIR})
+            DESTINATION ${PUREDATA_EXT_INSTALL_DIR})
     install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/spl2phon-help.pd
-            DESTINATION ${PD_EXT_INSTALL_DIR})
+            DESTINATION ${PUREDATA_EXT_INSTALL_DIR})
 
     install(TARGETS pd_phon2spl
             LIBRARY DESTINATION lib/pd-externals)
     install(TARGETS pd_phon2spl
-            LIBRARY DESTINATION ${PD_EXT_INSTALL_DIR})
+            LIBRARY DESTINATION ${PUREDATA_EXT_INSTALL_DIR})
     install(TARGETS pd_spl2phon
             LIBRARY DESTINATION lib/pd-externals)
     install(TARGETS pd_spl2phon
-            LIBRARY DESTINATION ${PD_EXT_INSTALL_DIR})
+            LIBRARY DESTINATION ${PUREDATA_EXT_INSTALL_DIR})
+endif()
+
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+    install(TARGETS pd_phon2spl pd_spl2phon
+        LIBRARY DESTINATION pd/extra
+    )
 endif()
