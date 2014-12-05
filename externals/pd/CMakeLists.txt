@@ -1,5 +1,6 @@
-include(FindPureData)
-include_directories(PD_INCLUDE_DIR)
+find_package(PureData REQUIRED)
+
+include_directories(${PUREDATA_INCLUDE_DIRS})
 include_directories(${CMAKE_SOURCE_DIR})
 add_definitions(-fvisibility=default)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/phon2spl-help.pd
