@@ -26,7 +26,7 @@ add_subdirectory(externals)
 add_subdirectory(tests)
 
 # install target
-install(TARGETS iso226 phon2spl
+install(TARGETS iso226 phon2spl spl2phon
         RUNTIME DESTINATION bin
         ARCHIVE DESTINATION lib)
 
