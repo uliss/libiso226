@@ -15,6 +15,7 @@ endif()
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     set(CMAKE_SHARED_LIBRARY_PREFIX "")
+    set(CMAKE_SHARED_LIBRARY_SUFFIX ".pd_linux")
 endif()
 
 set(CMAKE_INSTALL_NAME_DIR @executable_path)
