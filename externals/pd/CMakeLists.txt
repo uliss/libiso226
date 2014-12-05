@@ -57,7 +57,13 @@ if(APPLE)
 endif()
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+    set(PD_EXT_LINUX_DIR lib/pd/extra/iso226)
     install(TARGETS pd_phon2spl pd_spl2phon
         LIBRARY DESTINATION lib/pd/extra/iso226
     )
+
+    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/phon2spl-help.pd
+            DESTINATION ${PD_EXT_LINUX_DIR})
+    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/spl2phon-help.pd
+            DESTINATION ${PD_EXT_LINUX_DIR})
 endif()
