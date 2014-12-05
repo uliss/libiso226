@@ -58,6 +58,6 @@ endif()
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     install(TARGETS pd_phon2spl pd_spl2phon
-        LIBRARY DESTINATION lib/pd/iso226/extra
+        LIBRARY DESTINATION lib/pd/extra/iso226
     )
 endif()
