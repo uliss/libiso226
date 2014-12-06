@@ -22,7 +22,7 @@
 #ifdef __GNUC__
 #define ISO226_EXPORT __attribute__((visibility("default")))
 #elif _MSC_VER
-#define ISO226_EXPORT
+#define __declspec(dllexport)
 #endif
 
 #define ISO226_LIBRARY_VERSION "0.1"

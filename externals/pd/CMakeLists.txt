@@ -25,6 +25,11 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     set(CMAKE_SHARED_LIBRARY_SUFFIX ".pd_linux")
 endif()
 
+if(WIN32)
+	set(CMAKE_SHARED_LIBRARY_PREFIX "")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -flat_namespace -Wl,--enable-auto-import")
+endif()
+
 set(CMAKE_INSTALL_NAME_DIR @executable_path)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
 
@@ -38,6 +43,11 @@ set_target_properties(pd_phon2spl
     PROPERTIES OUTPUT_NAME phon2spl)
 set_target_properties(pd_spl2phon
     PROPERTIES OUTPUT_NAME spl2phon)
+	
+if(WIN32)
+	target_link_libraries(pd_phon2spl ${PUREDATA_LIBRARY}	wsock32 kernel32 user32 gdi32)
+	target_link_libraries(pd_spl2phon ${PUREDATA_LIBRARY}	wsock32 kernel32 user32 gdi32)
+endif()
 
 # install
 if(APPLE)

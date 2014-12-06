@@ -7,7 +7,9 @@
 find_path(PUREDATA_INCLUDE_DIR m_pd.h
           HINTS
           /usr/include
-          /Applications/Pd-extended.app/Contents/Resources/include)
+          /Applications/Pd-extended.app/Contents/Resources/include
+		  $ENV{PROGRAMFILES}/pd/include
+)
 
 set(PUREDATA_INCLUDE_DIRS ${PUREDATA_INCLUDE_DIR})
 
@@ -17,6 +19,13 @@ find_path(PUREDATA_EXTRA_DIR Gem
     ${PUREDATA_INCLUDE_DIR}/../lib/extra
     /Applications/Pd-extended.app/Contents/Resources/extra
 )
+
+if(WIN32)
+	find_library(PUREDATA_LIBRARY pd
+	HINTS
+	$ENV{PROGRAMFILES}/pd/bin
+	)
+endif()
 
 include(FindPackageHandleStandardArgs)
 

@@ -73,7 +73,7 @@ static void spl2phon_list(t_spl2phon * x, t_symbol *s, int argc, t_atom *argv)
     spl2phon_bang(x);
 }
 
-void spl2phon_setup()
+ISO226_EXPORT void spl2phon_setup()
 {
     spl2phon_class = class_new(gensym("spl2phon"),
                               (t_newmethod) spl2phon_new,
