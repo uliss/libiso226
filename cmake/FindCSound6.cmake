@@ -9,6 +9,7 @@ find_path(CSOUND6_INCLUDE_DIR csdl.h
             /usr/include/csound
             /Library/Frameworks/CsoundLib64.framework/Versions/6.0/Headers/
             /Library/Frameworks/CsoundLib64.framework/Versions/Current/Headers/
+			$ENV{PROGRAMFILES}/CSound6/include/csound
           PATH_SUFFIXES csound)
 
 
