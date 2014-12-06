@@ -1,6 +1,6 @@
 <CsoundSynthesizer>
 <CsOptions>
---opcode-lib=iso226.dylib -d -odac  ; OSX: newopc.dylib; Windows: newopc.dll
+--opcode-lib=iso226@CMAKE_SHARED_LIBRARY_SUFFIX@ -d -odac
 </CsOptions>
 <CsInstruments>
 
