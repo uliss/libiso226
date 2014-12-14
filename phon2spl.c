@@ -50,10 +50,10 @@ static void parse_options(int argc, char * argv[]) {
         switch (c) {
         case 'h':
             usage();
-            exit(0);
+            exit(EXIT_SUCCESS);
             break;
         case 'V':
-            printf("phon2spl %s\n", ISO226_LIBRARY_VERSION);
+            printf("%s %s\n", PROGRAMM_NAME, ISO226_LIBRARY_VERSION);
             exit(EXIT_SUCCESS);
             break;
         case '?':

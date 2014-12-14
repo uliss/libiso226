@@ -53,7 +53,7 @@ static void parse_options(int argc, char * argv[]) {
             exit(0);
             break;
         case 'V':
-            printf("spl2phon %s\n", ISO226_LIBRARY_VERSION);
+            printf("%s %s\n", PROGRAMM_NAME, ISO226_LIBRARY_VERSION);
             exit(EXIT_SUCCESS);
             break;
         case '?':
