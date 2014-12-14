@@ -39,10 +39,22 @@ instr 2
     loop_lt indx, 100, 1200, loop
 endin
 
+instr 3
+    indx init 40
+
+    loop:
+        isone phon2sonei indx
+        prints "phon2sone(%f) == %.3f\n", indx, isone
+        iphon sone2phoni isone
+        prints "sone2phon(%f) == %.3f\n", isone, iphon
+    loop_lt indx, 10, 100, loop
+endin
+
 </CsInstruments>
 <CsScore>
-i 2 0 0
-i 1 0 1
+;i 2 0 0
+;i 1 0 1
+i 3 0 0
 </CsScore>
 </CsoundSynthesizer>
 ;example by victor lazzarini

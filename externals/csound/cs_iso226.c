@@ -55,11 +55,50 @@ int spl2phon(CSOUND *csound, SPL2PHON *p) {
     return OK;
 }
 
+typedef struct  phon2sone_ {
+    OPDS  h;
+    MYFLT *out;/* output pointer  */
+    MYFLT *in; /* input pointer */
+} PHON2SONE;
+
+int phon2sone(CSOUND *csound, PHON2SONE *p) {
+    double sone = 0.0;
+    int r = 0;
+
+    if((r = iso226_phon2sone(*p->in, &sone)) == 0) {
+        *(p->out) = (MYFLT) sone;
+    }
+
+    return OK;
+}
+
+typedef struct sone2phon_ {
+    OPDS  h;
+    MYFLT *out;/* output pointer  */
+    MYFLT *in; /* input pointer */
+} SONE2PHON;
+
+int sone2phon(CSOUND *csound, SONE2PHON *p) {
+    double phon = 0.0;
+    int r = 0;
+
+    if((r = iso226_sone2phon(*p->in, &phon)) == 0) {
+        *(p->out) = (MYFLT) phon;
+    }
+
+    return OK;
+}
+
+
 static OENTRY localops[] = {
-    { "phon2spli", sizeof(PHON2SPL), 0, 3, "i", "ii", (SUBR) phon2spl, (SUBR) phon2spl, NULL },
-    { "phon2spl",  sizeof(PHON2SPL), 0, 3, "k", "kk", (SUBR) phon2spl, (SUBR) phon2spl, NULL },
-    { "spl2phoni", sizeof(SPL2PHON), 0, 3, "i", "ii", (SUBR) spl2phon, (SUBR) spl2phon, NULL },
-    { "spl2phon",  sizeof(SPL2PHON), 0, 3, "k", "kk", (SUBR) spl2phon, (SUBR) spl2phon, NULL }
+    { "phon2spli",  sizeof(PHON2SPL),  0, 3, "i", "ii", (SUBR) phon2spl, (SUBR) phon2spl, NULL },
+    { "phon2spl",   sizeof(PHON2SPL),  0, 3, "k", "kk", (SUBR) phon2spl, (SUBR) phon2spl, NULL },
+    { "spl2phoni",  sizeof(SPL2PHON),  0, 3, "i", "ii", (SUBR) spl2phon, (SUBR) spl2phon, NULL },
+    { "spl2phon",   sizeof(SPL2PHON),  0, 3, "k", "kk", (SUBR) spl2phon, (SUBR) spl2phon, NULL },
+    { "phon2sonei", sizeof(PHON2SONE), 0, 3, "i", "i", (SUBR) phon2sone, (SUBR) phon2sone, NULL },
+    { "phon2sone",  sizeof(PHON2SONE), 0, 3, "k", "k", (SUBR) phon2sone, (SUBR) phon2sone, NULL },
+    { "sone2phoni", sizeof(SONE2PHON), 0, 3, "i", "i", (SUBR) sone2phon, (SUBR) sone2phon, NULL },
+    { "sone2phon",  sizeof(SONE2PHON), 0, 3, "k", "k", (SUBR) sone2phon, (SUBR) sone2phon, NULL }
 };
 
 LINKAGE
