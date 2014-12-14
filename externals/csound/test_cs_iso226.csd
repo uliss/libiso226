@@ -30,12 +30,12 @@ endin
 
 instr 2
     indx init 20
-     
+
     loop:
-    	ispl phon2spl 60, indx
-    	prints "phon2spl(%f, %i) == %f\n", 60, indx, ispl
-    	iphon spl2phon ispl, indx
-    	prints "spl2phon(%f, %i) == %f\n", ispl, indx, iphon
+        ispl phon2spli 60, indx
+        prints "phon2spl(%f, %i) == %f\n", 60, indx, ispl
+        iphon spl2phoni ispl, indx
+        prints "spl2phon(%f, %i) == %f\n", ispl, indx, iphon
     loop_lt indx, 100, 1200, loop
 endin
 

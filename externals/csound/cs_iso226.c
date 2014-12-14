@@ -26,19 +26,10 @@ typedef struct  phon2spl_ {
     OPDS  h;
     MYFLT *out;/* output pointer  */
     MYFLT *in1, *in2; /* input pointers */
-} phon2spl;
+} PHON2SPL;
 
-int phon2spl_init(CSOUND *csound, phon2spl *p) {
-    double res = 0.0;
-    int r = 0;
-    if((r = iso226_phon2spl(*(p->in1), *(p->in2), &res)) == 0) {
-        *(p->out) = (MYFLT) res;
-    }
-
-    return OK;
-}
-
-int phon2spl_process_control(CSOUND * csound, phon2spl *p) {
+int phon2spl(CSOUND *csound, PHON2SPL *p)
+{
     double res = 0.0;
     int r = 0;
     if((r = iso226_phon2spl(*(p->in1), *(p->in2), &res)) == 0) {
@@ -52,19 +43,9 @@ typedef struct  spl2phon_ {
     OPDS  h;
     MYFLT *out;/* output pointer  */
     MYFLT *in1, *in2; /* input pointers */
-} spl2phon;
+} SPL2PHON;
 
-int spl2phon_init(CSOUND *csound, spl2phon *p) {
-    double res = 0.0;
-    int r = 0;
-    if((r = iso226_spl2phon(*(p->in1), *(p->in2), &res)) == 0) {
-        *(p->out) = (MYFLT) res;
-    }
-
-    return OK;
-}
-
-int spl2phon_process_control(CSOUND * csound, spl2phon *p) {
+int spl2phon(CSOUND *csound, SPL2PHON *p) {
     double res = 0.0;
     int r = 0;
     if((r = iso226_spl2phon(*(p->in1), *(p->in2), &res)) == 0) {
@@ -75,30 +56,10 @@ int spl2phon_process_control(CSOUND * csound, spl2phon *p) {
 }
 
 static OENTRY localops[] = {
-    {
-        "phon2spl", sizeof(phon2spl), 0, 3, "k", "kk",
-        (SUBR) phon2spl_init,
-        (SUBR) phon2spl_process_control,
-        NULL
-    },
-    {
-        "phon2spl", sizeof(phon2spl), 0, 3, "i", "ii",
-        (SUBR) phon2spl_init,
-        (SUBR) phon2spl_process_control,
-        NULL
-    },
-    {
-        "spl2phon", sizeof(spl2phon), 0, 3, "k", "kk",
-        (SUBR) spl2phon_init,
-        (SUBR) spl2phon_process_control,
-        NULL
-    },
-    {
-        "spl2phon", sizeof(spl2phon), 0, 3, "i", "ii",
-        (SUBR) spl2phon_init,
-        (SUBR) spl2phon_process_control,
-        NULL
-    }
+    { "phon2spli", sizeof(PHON2SPL), 0, 3, "i", "ii", (SUBR) phon2spl, (SUBR) phon2spl, NULL },
+    { "phon2spl",  sizeof(PHON2SPL), 0, 3, "k", "kk", (SUBR) phon2spl, (SUBR) phon2spl, NULL },
+    { "spl2phoni", sizeof(SPL2PHON), 0, 3, "i", "ii", (SUBR) spl2phon, (SUBR) spl2phon, NULL },
+    { "spl2phon",  sizeof(SPL2PHON), 0, 3, "k", "kk", (SUBR) spl2phon, (SUBR) spl2phon, NULL }
 };
 
 LINKAGE
