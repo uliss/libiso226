@@ -10,7 +10,7 @@ add_definitions(-fvisibility=hidden)
 add_definitions(-Wall)
 
 include(FindPureData)
-
+include(Doxygen)
 
 add_library(iso226 STATIC iso226.c)
 if(UNIX)
@@ -62,3 +62,9 @@ set(CPACK_SOURCE_IGNORE_FILES
 
 include(CPack)
 add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
+
+# documentation
+set(DOXY_OUTPUT_LANGUAGE "English")
+set(DOXY_INPUT ${PROJECT_SOURCE_DIR})
+ADD_DOCUMENTATION(doc Doxyfile)
+

@@ -30,6 +30,8 @@ More info can be found:
 
 ISO 226 standard defines equal loudness curves.
     @see http://en.wikipedia.org/wiki/Equal-loudness_contour
+
+@file
 */
 
 #ifdef __GNUC__
@@ -50,7 +52,7 @@ extern "C" {
   * @param phon - value in phon
   * @param freq - tone frequency
   * @param spl - pointer to result in db (SPL)
-  * @return - 0 on success or ISO226_ERROR otherwise
+  * @return 0 on success or ::ISO226_ERROR otherwise
   * @see iso226_spl2phon()
   */
 ISO226_EXPORT int iso226_phon2spl(double phon, double freq, double * spl);
@@ -60,7 +62,7 @@ ISO226_EXPORT int iso226_phon2spl(double phon, double freq, double * spl);
   * @param spl - loudness in db
   * @param freq - tone frequency
   * @param phon - pointer to result in phon
-  * @return - 0 on success or ISO226_ERROR on error
+  * @return 0 on success or ::ISO226_ERROR on error
   * @see iso226_phon2spl()
   */
 ISO226_EXPORT int iso226_spl2phon(double spl, double freq, double * phon);
@@ -69,7 +71,8 @@ ISO226_EXPORT int iso226_spl2phon(double spl, double freq, double * phon);
   * Converts loudness from phon values to sone.
   * @param phon - value in phon
   * @param sone - pointer to result in sone
-  * @return 0 on success, or ISO226_ERROR on error
+  * @return 0 on success, or ::ISO226_ERROR on error
+  * @see iso226_sone2phon()
   */
 ISO226_EXPORT int iso226_phon2sone(double phon, double * sone);
 
@@ -77,15 +80,19 @@ ISO226_EXPORT int iso226_phon2sone(double phon, double * sone);
   * Converts loudness from sone values to phon.
   * @param sone - value in sone
   * @param phon - pointer to result in phon
-  * @return 0 on success, or ISO226_ERROR on error
+  * @return 0 on success, or ::ISO226_ERROR on error
+  * @see iso226_phon2sone()
   */
 ISO226_EXPORT int iso226_sone2phon(double sone, double * phon);
 
+/**
+ * @brief The ISO226_ERROR enum defines error return codes
+ */
 enum ISO226_ERROR {
-    ISO226_INVALID_FREQUENCY = 2,
-    ISO226_NULL_DEST,
-    ISO226_INVALID_PHON,
-    ISO226_INVALID_SONE,
+    ISO226_INVALID_FREQUENCY = 2, ///< invalid freqency
+    ISO226_NULL_DEST,             ///< NULL output destination
+    ISO226_INVALID_PHON,          ///< invalid argument in phon (should be in range [20, 90])
+    ISO226_INVALID_SONE,          ///< invalid argument in sone (should be >= 1)
     _ISO226_ERROR_MAX
 };
 
