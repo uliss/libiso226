@@ -47,8 +47,9 @@ extern "C" {
 
 /**
   * Converts loudness value from 'phons' to dB (SPL) at specified pure tone frequency.
-  * @param phon - value in phon
-  * @param freq - tone frequency
+  * @param phon - value in phon (shoud be in range [10, 90])
+  * @param freq - tone frequency (shoud be in range [20, 12500] for phon <= 80 and
+  *     [20, 4000] for phon > 80)
   * @param spl - pointer to result in db (SPL)
   * @return - 0 on success or ISO226_ERROR otherwise
   * @see iso226_spl2phon()
@@ -67,7 +68,7 @@ ISO226_EXPORT int iso226_spl2phon(double spl, double freq, double * phon);
 
 /**
   * Converts loudness from phon values to sone.
-  * @param phon - value in phon
+  * @param phon - value in phon (should be >= 40)
   * @param sone - pointer to result in sone
   * @return 0 on success, or ISO226_ERROR on error
   */
@@ -75,7 +76,7 @@ ISO226_EXPORT int iso226_phon2sone(double phon, double * sone);
 
 /**
   * Converts loudness from sone values to phon.
-  * @param sone - value in sone
+  * @param sone - value in sone (should be >= 1)
   * @param phon - pointer to result in phon
   * @return 0 on success, or ISO226_ERROR on error
   */
