@@ -1,0 +1,12 @@
+#N canvas 254 238 294 237 10;
+#X obj 109 146 phon2sone;
+#X obj 109 175 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 30.0647 256;
+#X obj 109 91 line;
+#X obj 109 120 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 89.1 256;
+#X msg 109 62 40 \, 90 4000;
+#X connect 0 0 1 0;
+#X connect 2 0 3 0;
+#X connect 3 0 0 0;
+#X connect 4 0 2 0;
