@@ -100,9 +100,47 @@ TEST_CASE( "<=>", "<=> test" ) {
     }
 }
 
-TEST_CASE( "error test" "error test" ) {
-    for(int i = -1; i < 10; i++) {
-        CHECK(iso226_strerror(i));
+TEST_CASE( "error", "error test" ) {
+    for(int i = -1; i < 8; i++) {
+        CHECK(iso226_strerror(i) != NULL);
     }
+}
+
+TEST_CASE( "phon2sone", "phon2sone test" ) {
+    double sone;
+    REQUIRE(iso226_phon2sone(40, &sone) == 0);
+    CHECK(cmp(sone, 1));
+    REQUIRE(iso226_phon2sone(50, &sone) == 0);
+    CHECK(cmp(sone, 2));
+    REQUIRE(iso226_phon2sone(60, &sone) == 0);
+    CHECK(cmp(sone, 4));
+    REQUIRE(iso226_phon2sone(70, &sone) == 0);
+    CHECK(cmp(sone, 8));
+    REQUIRE(iso226_phon2sone(80, &sone) == 0);
+    CHECK(cmp(sone, 16));
+    REQUIRE(iso226_phon2sone(90, &sone) == 0);
+    CHECK(cmp(sone, 32));
+
+    REQUIRE_FALSE(iso226_phon2sone(40, 0) == 0);
+    REQUIRE_FALSE(iso226_phon2sone(10, &sone) == 0);
+}
+
+TEST_CASE( "sone2phon", "sone2phon test" ) {
+    double phon;
+    REQUIRE(iso226_sone2phon(1, &phon) == 0);
+    CHECK(cmp(phon, 40));
+    REQUIRE(iso226_sone2phon(2, &phon) == 0);
+    CHECK(cmp(phon, 50));
+    REQUIRE(iso226_sone2phon(4, &phon) == 0);
+    CHECK(cmp(phon, 60));
+    REQUIRE(iso226_sone2phon(8, &phon) == 0);
+    CHECK(cmp(phon, 70));
+    REQUIRE(iso226_sone2phon(16, &phon) == 0);
+    CHECK(cmp(phon, 80));
+    REQUIRE(iso226_sone2phon(32, &phon) == 0);
+    CHECK(cmp(phon, 90));
+
+    REQUIRE_FALSE(iso226_sone2phon(1, 0) == 0);
+    REQUIRE_FALSE(iso226_sone2phon(0, &phon) == 0);
 }
 

@@ -19,6 +19,19 @@
 #ifndef ISO226_H
 #define ISO226_H
 
+/**
+\mainpage ISO226 library documentation.
+
+This library converts loudness units: phon, db (SPL) and sone.
+More info can be found:
+    - http://en.wikipedia.org/wiki/Phon
+    - http://en.wikipedia.org/wiki/Sone
+    - http://en.wikipedia.org/wiki/Sound_pressure_level
+
+ISO 226 standard defines equal loudness curves.
+    @see http://en.wikipedia.org/wiki/Equal-loudness_contour
+*/
+
 #ifdef __GNUC__
 #define ISO226_EXPORT __attribute__((visibility("default")))
 #elif _MSC_VER
@@ -32,16 +45,55 @@
 extern "C" {
 #endif
 
+/**
+  * Converts loudness value from 'phons' to dB (SPL) at specified pure tone frequency.
+  * @param phon - value in phon
+  * @param freq - tone frequency
+  * @param spl - pointer to result in db (SPL)
+  * @return - 0 on success or ISO226_ERROR otherwise
+  * @see iso226_spl2phon()
+  */
 ISO226_EXPORT int iso226_phon2spl(double phon, double freq, double * spl);
+
+/**
+  * Converts loudness value from db (SPL) to phons at specified frequency.
+  * @param spl - loudness in db
+  * @param freq - tone frequency
+  * @param phon - pointer to result in phon
+  * @return - 0 on success or ISO226_ERROR on error
+  * @see iso226_phon2spl()
+  */
 ISO226_EXPORT int iso226_spl2phon(double spl, double freq, double * phon);
+
+/**
+  * Converts loudness from phon values to sone.
+  * @param phon - value in phon
+  * @param sone - pointer to result in sone
+  * @return 0 on success, or ISO226_ERROR on error
+  */
+ISO226_EXPORT int iso226_phon2sone(double phon, double * sone);
+
+/**
+  * Converts loudness from sone values to phon.
+  * @param sone - value in sone
+  * @param phon - pointer to result in phon
+  * @return 0 on success, or ISO226_ERROR on error
+  */
+ISO226_EXPORT int iso226_sone2phon(double sone, double * phon);
 
 enum ISO226_ERROR {
     ISO226_INVALID_FREQUENCY = 2,
-    ISO226_INVALID_PHON,
     ISO226_NULL_DEST,
-    ISO226_ERROR_MAX
+    ISO226_INVALID_PHON,
+    ISO226_INVALID_SONE,
+    _ISO226_ERROR_MAX
 };
 
+/**
+  * Returns string error description by given error code
+  * @param c - error code
+  * @return pointer to static string
+  */
 ISO226_EXPORT const char * iso226_strerror(int c);
 
 #ifdef __cplusplus

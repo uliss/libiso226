@@ -123,17 +123,42 @@ int iso226_spl2phon(double spl, double freq, double * phon) {
     return 0;
 }
 
+int iso226_phon2sone(double phon, double * sone)
+{
+    if(sone == NULL)
+        return ISO226_NULL_DEST;
+
+    if(phon < 40)
+        return ISO226_INVALID_PHON;
+
+    *sone = pow(pow(10, ((phon - 40) / 10.0)), 0.30103);
+    return 0;
+}
+
+int iso226_sone2phon(double sone, double * phon)
+{
+    if(phon == NULL)
+        return ISO226_NULL_DEST;
+
+    if(sone < 1)
+        return ISO226_INVALID_SONE;
+
+    *phon = 40 + 10 * log2(sone);
+
+    return 0;
+}
+
 static const char * iso226_errors[] = {
     "",
     "",
-    "Invalid frequency: shoud be in range [20,12500]\n",
-    "Invalid phon volume value\n",
-    "Null output argument\n"
+    "Invalid frequency: shoud be in range [20,12500]",
+    "Null output argument"
+    "Invalid phon volume value",
+    "Invalid sone value"
 };
 
 const char * iso226_strerror(int c) {
-    const size_t num_errors = sizeof(iso226_errors) / sizeof(iso226_errors[0]);
-    if(c < 0 || c >= num_errors)
+    if(c < 0 || c >= (_ISO226_ERROR_MAX - 1))
         return "";
 
     return iso226_errors[c];

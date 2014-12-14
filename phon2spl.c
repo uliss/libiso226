@@ -83,7 +83,7 @@ int main(int argc, char * argv[]) {
     ret = iso226_phon2spl(fon, freq, &res);
 
     if(ret != 0) {
-        fputs(iso226_strerror(ret), stderr);
+        fprintf(stderr, "%s\n", iso226_strerror(ret));
         return ret;
     }
 
